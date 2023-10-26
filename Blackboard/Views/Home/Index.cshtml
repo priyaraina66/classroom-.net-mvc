@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@model Blackboard.ViewModels.HomeViewModel
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="row">
+        <div class="col-sm-9">
+            <partial name="_UserClassroomsPartial" />
+        </div>
+        <div class="col-sm-3">
+            <div class="light-grey-box">
+                <partial name="_NotificationsPartial" />
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="custom-card" style="margin-top: 75px;">
+        <div class="row no-gutters">
+            <div class="col-sm-5">
+                <img src="~/empty_states_home.png" title="empty_states_home" class="" alt="Blackboard" width="350" height="400">
+            </div>
+            <div class="col-sm-7">
+                <div class="card-body">
+                    <h4 class="card-title">Welcome to BlackBoard</h4>
+                    <p class="card-text" style="font-size: 22px">
+						Do Register/Login to get started with your classes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .light-grey-box {
+        background-color: #393a37 !important;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 80px;
+    }
+    .custom-card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        /*border: 0.5px solid rgba(0, 0, 0, 0.125);*/
+        border-radius: 0.25rem;
+    }
+</style>
